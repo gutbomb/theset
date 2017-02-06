@@ -181,7 +181,7 @@ function viewAlbumController($http,$routeParams) {
 	 	then(function(response) {
 	 		vac.tracks = response.data;
 	 	});
-	$http.get("http://localhost/~jason/gutbomb.net/theset/api/comments.php?album_id="+$routeParams.id).
+	$http.get("/api/comments.php?album_id="+$routeParams.id).
 	 	then(function(response) {
 	 		vac.comments = response.data;
 	 	});
