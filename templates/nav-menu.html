@@ -1,0 +1,26 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="navController">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">The Set</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li ng-class="{active: $route.current.activeTab == 'home'}"><a href="#/home">Home</a></li>
+        <li ng-class="{active: $route.current.activeTab == 'albums'}"><a href="#/albums">Albums</a></li>
+        <li ng-class="{active: $route.current.activeTab == 'artists'}"><a href="#/artists">Artists</a></li>
+        <li ng-class="{active: $route.current.activeTab == 'genres'}"><a href="#/genres">Genres</a></li>
+        <li ng-class="{active: $route.current.activeTab == 'status'}"><a href="#/status">Status</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-class="{active: $route.current.activeTab == 'account'}"><a href="#/account">Account</a></li>
+        <li ng-class="{active: $route.current.activeTab == 'login'}"><a href="#/login">Logout</a></li>
+      </ul>
+    </div><!--/.navbar-collapse -->
+  </div>
+</nav>
