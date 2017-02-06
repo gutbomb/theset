@@ -118,19 +118,19 @@ app.controller('homeController', homeController);
 
 function homeController($http) {
 	var hc = this;
-	$http.get("http://gutbomb.net/theset/api/years.php?year_status=previous").
+	$http.get("http://theset.gutbomb.net/api/years.php?year_status=previous").
 		then(function(response) {
 			hc.previousYear = response.data[0];
-			$http.get("http://gutbomb.net/theset/api/album.php?year="+hc.previousYear.year).
+			$http.get("http://theset.gutbomb.net/api/album.php?year="+hc.previousYear.year).
 			 	then(function(response) {
 			 		hc.previousAlbums = response.data;
 			 	});
 		});
 	
-	$http.get("http://gutbomb.net/theset/api/years.php?year_status=active").
+	$http.get("http://theset.gutbomb.net/api/years.php?year_status=active").
 		then(function(response) {
 			hc.currentYear = response.data[0];
-				$http.get("http://gutbomb.net/theset/api/album.php?year="+hc.currentYear.year).
+				$http.get("http://theset.gutbomb.net/api/album.php?year="+hc.currentYear.year).
 					then(function(response) {
 						hc.currentAlbums = response.data;
 					});
@@ -141,7 +141,7 @@ app.controller('albumsController', albumsController);
 
 function albumsController($http) {
 	var ac = this;
-	$http.get("http://gutbomb.net/theset/api/album.php").
+	$http.get("http://theset.gutbomb.net/api/album.php").
 	 	then(function(response) {
 	 		ac.albums = response.data;
 	 	});
@@ -152,7 +152,7 @@ app.controller('artistsController', artistsController);
 
 function artistsController($http) {
 	var arc = this;
-	$http.get("http://gutbomb.net/theset/api/artist.php").
+	$http.get("http://theset.gutbomb.net/api/artist.php").
 	 	then(function(response) {
 	 		arc.artists = response.data;
 	 	});
@@ -163,10 +163,10 @@ app.controller('viewAlbumController', viewAlbumController);
 function viewAlbumController($http,$routeParams) {
 	var vac = this;
 	vac.editMode = 0;
-	$http.get("http://gutbomb.net/theset/api/years.php?year_status=active").
+	$http.get("http://theset.gutbomb.net/api/years.php?year_status=active").
 		then(function(response) {
 			vac.currentYear = response.data[0];
-			$http.get("http://gutbomb.net/theset/api/album.php?album_id="+$routeParams.id).
+			$http.get("http://theset.gutbomb.net/api/album.php?album_id="+$routeParams.id).
 		 	then(function(response) {
 		 		vac.album = response.data[0];
 		 		//console.log(vac.currentYear);
@@ -177,7 +177,7 @@ function viewAlbumController($http,$routeParams) {
 				}
 		 	});
 		});
-	$http.get("http://gutbomb.net/theset/api/track.php?album_id="+$routeParams.id).
+	$http.get("http://theset.gutbomb.net/api/track.php?album_id="+$routeParams.id).
 	 	then(function(response) {
 	 		vac.tracks = response.data;
 	 	});
