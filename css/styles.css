@@ -7,15 +7,15 @@ body {
 }
 
 .footer {
-  padding-top: 40px;
   padding-bottom: 40px;
+  padding-top: 40px;
 }
 
 .home-album, .albumlist-img {
 	float: left;
 	height: 100px;
-    width: 100px;
     padding: 5px;
+    width: 100px;
 }
 
 #how-it-works, #album-header, .inner-page {
@@ -54,15 +54,14 @@ body {
 	height:130px;
 }
 section {
-    padding-top: 20px;
     padding-bottom: 20px;
+    padding-top: 20px;
 }
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .footer {
-    padding-right: 0;
     padding-left: 0;
+    padding-right: 0;
   }
-}
 }

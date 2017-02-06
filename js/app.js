@@ -104,7 +104,7 @@ app.config(function ($routeProvider) {
 		})
 		.otherwise({
 			redirectTo: "/home"
-		})
+		});
 });
 
 app.controller('navController', navController);
