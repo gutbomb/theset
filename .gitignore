@@ -1,2 +1,5 @@
 includes/dbconnect.php
 node_modules/
+.git/
+.idea/
+theset.iml
