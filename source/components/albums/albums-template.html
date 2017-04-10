@@ -1,0 +1,11 @@
+<section class="inner-page">
+	<div class="container">
+		<h2>Albums</h2>
+		<div ng-repeat="album in ac.albums">
+			<div ng-if="(($index + 1) % 2)"><h3>{{album.year}}</h3><hr /></div>
+			<p class="album-list-item"><a href="/view-album/{{album.album_id}}"><img ng-src="images/albums/{{album.album_id}}.jpg" class="albumlist-img"></a><strong>{{album.source_name}}'s Pick: </strong><strong><a href="/view-album/{{album.album_id}}">{{album.album_name}}</a></strong> by <strong><a href="/view-artist/{{album.artist_id}}">{{album.artist_name}}</a></strong><br>
+			<span ng-repeat="rating in album.reviews">{{rating.review_source_name}}: {{rating.score | number : 2}}<br /></span></p>
+
+		</div>
+	</div>
+</section>

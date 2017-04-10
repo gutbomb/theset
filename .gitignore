@@ -1,5 +1,9 @@
-includes/dbconnect.php
+public/
 node_modules/
 .git/
 .idea/
 theset.iml
+lib/
+gulpfile.js
+source/includes/dbconnect.php
+bundle.js

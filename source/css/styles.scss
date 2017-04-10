@@ -1,0 +1,52 @@
+@import '../components/common/jumbotron/jumbotron-styles';
+@import '../components/common/page-footer/page-footer-styles';
+@import '../components/view-album/view-album-styles';
+@import '../components/albums/albums-styles';
+
+body {
+  padding-top: 30px;
+}
+
+.home-album, .albumlist-img {
+	float: left;
+	height: 100px;
+    padding: 5px;
+    width: 100px;
+}
+
+#how-it-works, #album-header, .inner-page {
+	margin-top:-50px;
+}
+
+#how-it-works {
+	background-color: #808080;
+}
+
+#last-week {
+	background-color: #9d9d9d;
+}
+
+#this-week, .inner-page {
+	background-color: #cccccc;
+}
+
+#vital-statistics {
+	background-color: #dddddd;
+}
+
+.thumbnail {
+	background-color: #777777;
+}
+
+section {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

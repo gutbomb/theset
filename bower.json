@@ -1,0 +1,24 @@
+{
+  "name": "theset",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "Jason Merrill <gutbomb@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/gutbomb/theset",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-route": "^1.6.3",
+    "bootstrap": "^3.3.7"
+  }
+}
