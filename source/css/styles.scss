@@ -1,6 +1,7 @@
 @import '../components/common/jumbotron/jumbotron-styles';
 @import '../components/common/page-footer/page-footer-styles';
 @import '../components/view-album/view-album-styles';
+@import '../components/view-artist/view-artist-styles';
 @import '../components/albums/albums-styles';
 
 body {
@@ -14,7 +15,7 @@ body {
     width: 100px;
 }
 
-#how-it-works, #album-header, .inner-page {
+#how-it-works, .inner-page {
 	margin-top:-50px;
 }
 
