@@ -1,4 +1,4 @@
-var app = angular.module('theSetApp', ['ngRoute']);
+var app = angular.module('theSetApp', ['ngRoute', 'ngSanitize']);
 
 import navMenuController from '../components/common/nav-menu/nav-menu-controller';
 import navMenu from '../components/common/nav-menu/nav-menu-directive';
