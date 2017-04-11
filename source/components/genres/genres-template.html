@@ -1,3 +1,10 @@
-<div class="container">
-	genres!
-</div>
+<section class="inner-page">
+	<div class="container">
+		<h2>Genres</h2>
+		<div ng-repeat="album in (orderedAlbums=(gc.albums | orderBy: 'album_genre'))">
+			<div ng-if="album.album_genre!==orderedAlbums[$index-1].album_genre"><h3>{{album.album_genre}}</h3><hr /></div>
+			<p class="album-list-item"><a href="/view-album/{{album.album_id}}"><img ng-src="images/albums/{{album.album_id}}.jpg" class="albumlist-img"></a><strong>{{album.source_name}}'s Pick: </strong><strong><a href="/view-album/{{album.album_id}}">{{album.album_name}}</a></strong> by <strong><a href="/view-artist/{{album.artist_id}}">{{album.artist_name}}</a></strong><br>
+				<span ng-repeat="rating in album.reviews">{{rating.review_source_name}}: {{rating.score | number : 2}}<br /></span></p>
+		</div>
+	</div>
+</section>

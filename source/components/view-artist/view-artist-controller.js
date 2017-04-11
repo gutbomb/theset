@@ -7,8 +7,8 @@ export default function ($http, $routeParams) {
         varc.artist = response.data;
     });
 
-	$http.get('/api/album.php?artist_id='+$routeParams.id).
-	then(function(response) {
-		varc.albums = response.data;
-	});
+    $http.get('/api/album.php?artist_id='+$routeParams.id).
+    then(function(response) {
+        varc.albums = response.data;
+    });
 }
