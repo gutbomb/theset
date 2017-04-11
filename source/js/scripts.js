@@ -99,6 +99,9 @@ app.config(function($httpProvider) {
 app.run(function ($rootScope, $location, loginService) {
     $rootScope.$on('$locationChangeStart', function () {
         $rootScope.isLoggedIn = loginService.isAuthenticated();
-        $rootScope.userId = loginService.getUserId();
+        if ($rootScope.isLoggedIn === true) {
+            $rootScope.userId = loginService.getUserId();
+            console.log($rootScope.userId);
+        }
     });
 });

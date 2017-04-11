@@ -38,7 +38,7 @@ export default function ($q, $http, $window) {
     }
 
     function getUserId() {
-        return $window.localStorage['theset_userId'];
+        return parseToken(getToken()).id;
     }
 
     function isAuthenticated() {
@@ -59,7 +59,6 @@ export default function ($q, $http, $window) {
 
     function saveToken(token) {
         $window.localStorage['theset_jwtToken'] = token;
-        $window.localStorage['theset_ userId'] = parseToken(getToken()).id;
     }
 
     function getActiveUser() {
