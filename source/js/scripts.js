@@ -13,7 +13,8 @@ import genresController from '../components/genres/genres-controller';
 import statusController from '../components/status/status-controller';
 import accountController from '../components/account/account-controller';
 import loginController from '../components/login/login-controller';
-
+import loginService from '../components/login/login-service';
+import authenticationInterceptor from '../components/login/authentication-interceptor-service';
 
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
@@ -66,7 +67,7 @@ app.config(function ($routeProvider, $locationProvider) {
             controllerAs: 'acc',
             activeTab: 'account'
         })
-        .when('/login', {
+        .when('/loginpage', {
             templateUrl: 'components/login/login-template.html',
             controller: 'loginController',
             controllerAs: 'lc',
@@ -90,3 +91,14 @@ app.controller('genresController', genresController);
 app.controller('statusController', statusController);
 app.controller('accountController', accountController);
 app.controller('loginController', loginController);
+app.factory('loginService', loginService);
+app.factory('authenticationInterceptor', authenticationInterceptor);
+app.config(function($httpProvider) {
+    $httpProvider.interceptors.push('authenticationInterceptor');
+});
+app.run(function ($rootScope, $location, loginService) {
+    $rootScope.$on('$locationChangeStart', function () {
+        $rootScope.isLoggedIn = loginService.isAuthenticated();
+        $rootScope.userId = loginService.getUserId();
+    });
+});

@@ -15,11 +15,12 @@
         <li ng-class="{active: $route.current.activeTab == 'albums'}"><a href="/albums">Albums</a></li>
         <li ng-class="{active: $route.current.activeTab == 'artists'}"><a href="/artists">Artists</a></li>
         <li ng-class="{active: $route.current.activeTab == 'genres'}"><a href="/genres">Genres</a></li>
-        <li ng-class="{active: $route.current.activeTab == 'status'}"><a href="/status">Status</a></li>
+        <li ng-if="isLoggedIn" ng-class="{active: $route.current.activeTab == 'status'}"><a href="/status">Status</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li ng-class="{active: $route.current.activeTab == 'account'}"><a href="/account">Account</a></li>
-        <li ng-class="{active: $route.current.activeTab == 'login'}"><a href="/login">Logout</a></li>
+        <li ng-if="isLoggedIn" ng-class="{active: $route.current.activeTab == 'account'}"><a href="/account">Account</a></li>
+        <li ng-if="isLoggedIn" ng-class="{active: $route.current.activeTab == 'login'}"><a href="#" ng-click="logout()">Logout</a></li>
+        <li ng-if="!isLoggedIn" ng-class="{active: $route.current.activeTab == 'login'}"><a href="/loginpage">Login</a></li>
       </ul>
     </div><!--/.navbar-collapse -->
   </div>
