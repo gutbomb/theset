@@ -4,6 +4,5 @@ export default function ($http) {
     $http.get('/api/album.php').
     then(function(response) {
         gc.albums = response.data;
-        console.log(gc.albums);
     });
 }
