@@ -148,7 +148,7 @@ app.run(function ($rootScope, $location, loginService) {
             loginService.getUser($rootScope.userId).then(function(user) {
                 $rootScope.user=user;
                 $rootScope.isAdmin = $rootScope.user.user_level === 'admin';
-                if($rootScope.user.password_must_change==='1') {
+                if($rootScope.user.password_mustchange==='1') {
                     $location.path('/change-password');
                 }
             });

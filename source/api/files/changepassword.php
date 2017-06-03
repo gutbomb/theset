@@ -5,7 +5,7 @@ $sql="SELECT source_password FROM sources WHERE source_id=".$token_data->id;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    if (password_verify($old_password, $row['password'])) {
+    if (password_verify($old_password, $row['source_password'])) {
         $sql="UPDATE sources SET password_mustchange=NULL, source_password='".addslashes(password_hash($new_password, PASSWORD_DEFAULT))."' WHERE source_id=".$token_data->id;
         if ($conn->query($sql) === TRUE) {
             $output['status'] = "password changed successfully";
