@@ -1,14 +1,12 @@
-export default function ($q, $http, $window) {
-    'ngInject';
-
+export default function ($q, $http, $window, appConfig) {
     function loginUser(username, password) {
-        var defer = $q.defer();
-        var self = this;
+        let defer = $q.defer();
+        let self = this;
         $http({
             method: 'POST',
-            url: '/api/auth.php',
+            url: appConfig.apiUrl+'/auth',
             data: {username: username, password: password},
-            headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+            headers : {'Content-Type': 'application/json'}
         }).then(function(resp) {
             if (resp.data && resp.data.token) {
                 self.activeUser = self.parseToken(resp.data.token).id;
@@ -37,24 +35,32 @@ export default function ($q, $http, $window) {
         return $window.localStorage['theset_jwtToken'];
     }
 
-    function getUserId() {
-        return parseToken(getToken()).id;
+    function isAuthenticated() {
+        let token = this.getToken();
+
+        return !!token;
     }
 
-    function isAuthenticated() {
-        var token = this.getToken();
+    function getUser(userId) {
+        return $http.get(appConfig.apiUrl+'/user/'+userId).then(function(response) {
+            return response.data[0];
+        });
+    }
 
-        if(token) {
-            return true;
-        } else {
-            return false;
-        }
+    function isAdmin(userId) {
+        return this.getUser(userId).then(function(user) {
+            return user.user_level === 'admin';
+        });
     }
 
     function parseToken(token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        let base64Url = token.split('.')[1];
+        let base64 = base64Url.replace('-', '+').replace('_', '/');
         return JSON.parse($window.atob(base64));
+    }
+
+    function getUserId() {
+        return parseToken(getToken()).id;
     }
 
     function saveToken(token) {
@@ -65,15 +71,49 @@ export default function ($q, $http, $window) {
         return this.activeUser;
     }
 
+    function changePassword(oldPassword, newPassword) {
+        let defer = $q.defer();
+
+        $http({
+            method: 'POST',
+            url: appConfig.apiUrl+'/change-password',
+            data: {oldPassword: oldPassword, newPassword: newPassword},
+            headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function() {
+            defer.resolve(true);
+        }, function() {
+            defer.resolve(false);
+        }).catch(function(error) {
+            defer.reject(error);
+        });
+
+        return defer.promise;
+    }
+
+    function resetPassword(email) {
+        return $http.get(appConfig.apiUrl+'/reset-password/'+email).then(
+            function(response) {
+                return response.data;
+            }).catch(
+            function(error) {
+                return $q.reject(error);
+            }
+        );
+    }
+
     return {
         loginUser: loginUser,
         getActiveUser: getActiveUser,
         getToken: getToken,
         clearToken: clearToken,
         getUserId: getUserId,
+        getUser: getUser,
         saveToken: saveToken,
         isAuthenticated: isAuthenticated,
-        parseToken: parseToken
+        isAdmin: isAdmin,
+        parseToken: parseToken,
+        changePassword: changePassword,
+        resetPassword: resetPassword
     };
 }
 

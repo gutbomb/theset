@@ -1,3 +1,51 @@
-<div class="container">
-	status!
-</div>
+<section class="inner-page">
+	<div class="container">
+		<h2>Status</h2>
+		<div class="row">
+			<div class="col-xs-3">
+				<strong>Artist</strong>
+			</div>
+			<div class="col-xs-4">
+				<strong>Album</strong>
+			</div>
+			<div class="col-xs-1">
+				<strong>Tracks</strong>
+			</div>
+			<div class="col-xs-1">
+				<strong>Jason Ratings</strong>
+			</div>
+			<div class="col-xs-1">
+				<strong>David Ratings</strong>
+			</div>
+			<div class="col-xs-1">
+				<strong>Jason Reviews</strong>
+			</div>
+			<div class="col-xs-1">
+				<strong>David Reviews</strong>
+			</div>
+		</div>
+		<div class="row" ng-repeat="album in sc.status">
+			<div class="col-xs-3">
+				<a href="view-artist/{{album.artist_id}}">{{album.artist_name}}</a>
+			</div>
+			<div class="col-xs-4">
+				<a href="view-artist/{{album.album_id}}">{{album.album_name}}</a>
+			</div>
+			<div class="col-xs-1">
+				{{album.track_count}}
+			</div>
+			<div class="col-xs-1">
+				{{album.jason_rating_count}}
+			</div>
+			<div class="col-xs-1">
+				{{album.david_rating_count}}
+			</div>
+			<div class="col-xs-1">
+				{{album.jason_review_count}}
+			</div>
+			<div class="col-xs-1">
+				{{album.david_review_count}}
+			</div>
+		</div>
+	</div>
+</section>

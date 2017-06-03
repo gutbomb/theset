@@ -1,10 +1,9 @@
-export default function ($injector) {
-    'ngInject';
+export default function ($injector, appConfig) {
     return {
         // automatically attach Authorization header
         request: function(config) {
-            if(config.url.indexOf('/api/auth.php') < 0 && config.url.indexOf('/api') >= 0) {
-                var token = $injector.get('loginService').getToken();
+            if(config.url.indexOf(appConfig.apiUrl+'/auth') < 0 && config.url.indexOf(appConfig.apiUrl) >= 0) {
+                let token = $injector.get('loginService').getToken();
                 if (token) {
                     config.headers.Authorization = 'Bearer ' + token;
                 }
@@ -15,8 +14,8 @@ export default function ($injector) {
 
         // If a token was sent back, save it
         response: function(res) {
-            if(res.config.url.indexOf('/api/auth.php') >= 0 && res.data.token) {
-                var loginService = $injector.get('loginService');
+            if(res.config.url.indexOf(appConfig.apiUrl+'/auth') >= 0 && res.data.token) {
+                let loginService = $injector.get('loginService');
                 loginService.saveToken(res.data.token);
             }
 

@@ -2,7 +2,7 @@
 	<div class="container">
 		<h2>Artists</h2>
 		<div ng-repeat="artist in arc.artists">
-			<p><strong><a href="/view-artist/{{artist.artist_id}}">{{artist.artist_name}}</a></strong></p>
+			<p class="album-list-item"><a href="/view-artist/{{artist.artist_id}}"><img ng-src="images/artists/{{artist.artist_id}}.jpg" class="albumlist-img"></a> <strong><a href="/view-artist/{{artist.artist_id}}">{{artist.artist_name}}</a></strong><br>
 		</div>
 	</div>
 </section>

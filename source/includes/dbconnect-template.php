@@ -1,6 +1,12 @@
 <?php
-    $servername = "YOUR SERVER HERE"; //CHANGE THIS
-    $username = "YOUR USERNAME HERE"; //CHANGE THIS
-    $password = "YOUR PASSWORD HERE"; //CHANGE THIS
-    $dbname = "YOUR DATABASE NAME HERE"; //CHANGE THIS
-?>
+$servername = "";
+$username = ""; //CHANGE THIS
+$password = ""; //CHANGE THIS
+$dbname = ""; //CHANGE THIS
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$conn->query("SET NAMES utf8");

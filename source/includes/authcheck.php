@@ -16,5 +16,10 @@
         if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
             $token_data=(JWT::decode($matches[1], 'jwt_key', true));
         }
+    } else {
+        header('HTTP/1.1 401 Unauthorized', true, 401);
+        $output['status'] = "not logged in";
+        $output['errors'] = "invalid";
+        exit();
     }
 ?>

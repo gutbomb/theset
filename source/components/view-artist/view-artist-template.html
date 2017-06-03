@@ -1,8 +1,12 @@
 <section id="artist-header">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <h2><strong>{{varc.artist[0].artist_name}}</strong></h2>
+            <div class="col-xs-4">
+                <img class="img-responsive" ng-src="images/artists/{{varc.artist.artist_id}}.jpg">
+            </div>
+            <div class="col-xs-8">
+                <h2><strong>{{varc.artist.artist_name}}</strong></h2>
+                <div class="album-blurb-text">{{varc.artist.artist_blurb}}</div>
             </div>
         </div>
     </div>
@@ -10,11 +14,11 @@
 
 <section id="albums-list">
     <div class="container">
-        <div ng-repeat="album in varc.albums">
-            <div ng-if="(($index + 1) % 2)"><h3>{{album.year}}</h3><hr /></div>
+        <div ng-repeat="album in (orderedAlbums=(varc.albums | orderBy: 'year'))">
+            <div ng-if="album.year!==orderedAlbums[$index-1].year"><h3>{{album.year}}</h3><hr /></div>
             <p class="album-list-item"><a href="/view-album/{{album.album_id}}"><img ng-src="images/albums/{{album.album_id}}.jpg" class="albumlist-img"></a><strong>{{album.source_name}}'s Pick: </strong><strong><a href="/view-album/{{album.album_id}}">{{album.album_name}}</a></strong> by <strong><a href="/view-artist/{{album.artist_id}}">{{album.artist_name}}</a></strong><br>
-                <span ng-repeat="rating in album.reviews">{{rating.review_source_name}}: {{rating.score | number : 2}}<br /></span></p>
-
+                <span ng-repeat="rating in album.reviews">{{rating.review_source_name}}: {{rating.score | number : 2}}<br /></span>
+            </p>
         </div>
     </div>
 </section>

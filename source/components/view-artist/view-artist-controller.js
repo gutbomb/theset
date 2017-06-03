@@ -1,13 +1,14 @@
 export default function ($http, $routeParams) {
-    'ngInject';
-    var varc = this;
+    let varc = this;
 
-    $http.get('/api/artist.php?artist_id='+$routeParams.id).
+    $http.get('/api/artist/'+$routeParams.id).
     then(function(response) {
-        varc.artist = response.data;
+        varc.artist = response.data[0];
     });
 
-    $http.get('/api/album.php?artist_id='+$routeParams.id).
+
+
+    $http.get('/api/album?artist_id='+$routeParams.id).
     then(function(response) {
         varc.albums = response.data;
     });

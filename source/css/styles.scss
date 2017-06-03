@@ -39,6 +39,66 @@ body {
 	background-color: #777777;
 }
 
+.sort-header {
+  font-weight: bold;
+}
+
+.sort-header:hover {
+  cursor: pointer;
+}
+
+.sort-true::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-bottom: 4px dashed;
+  border-bottom: 4px solid\9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  content: " ";
+}
+
+.sort-false::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid\9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  content: " ";
+}
+
+.row-bordered {
+  border-bottom: 1px solid #ccc;
+}
+
+.row-bordered:last-of-type {
+  border-bottom: 0;
+}
+
+.grid-header {
+  background-color: #000;
+}
+
+.grid-header a {
+  color: #FFF;
+}
+
+.panel-default {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.panel-table {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 section {
     padding-bottom: 20px;
     padding-top: 20px;

@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": false
+    "es6": false,
+    "jquery": true
   },
   "ecmaFeatures": {
     "modules": true
@@ -27,7 +28,7 @@
     "comma-style": [2, "last"],
     "curly": [2, "all"],
     "eqeqeq": 2,
-    "indent": [2, 4],
+    "indent": [1, 4],
     "no-console": 1,
     "no-trailing-spaces": 2,
     "no-use-before-define": 2,

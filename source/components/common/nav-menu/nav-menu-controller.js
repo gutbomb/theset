@@ -1,6 +1,4 @@
 export default function ($scope, $route, $location, $window, $rootScope) {
-    'ngInject';
-
     $scope.$route = $route;
 
     function logout() {

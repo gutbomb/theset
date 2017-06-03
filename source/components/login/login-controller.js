@@ -1,6 +1,5 @@
-export default function (loginService, $rootScope) {
-    'ngInject';
-    var lc = this;
+export default function (loginService, $rootScope, $location) {
+    let lc = this;
 
     lc.inputEmail = '';
     lc.inputPassword = '';
@@ -9,6 +8,7 @@ export default function (loginService, $rootScope) {
         loginService.loginUser(lc.inputEmail, lc.inputPassword).then(function (data) {
             if (data) {
                 $rootScope.isLoggedIn = true;
+                $location.path('/home');
             } else {
                 alert('login failed');
             }
