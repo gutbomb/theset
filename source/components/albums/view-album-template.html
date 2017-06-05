@@ -41,6 +41,9 @@
 							<option value="4.50">4.50</option>
 							<option value="5.00">5.00</option>
 						</select>
+                        <span ng-if="vac.ratings[$index].updated" class="label label-success">Updated</span>
+                        <span ng-if="vac.ratings[$index].updating" class="label label-warning">Updating</span>
+                        <span ng-if="vac.ratings[$index].failed" class="label label-danger">Failed</span>
 					</div>
                     <div class="form-group" ng-if="track.jason_rating===null && userId==='2'">
                         <select ng-model="vac.newRatings[track.track_id].rating_score" class="form-control" ng-change="vac.saveRating(track.track_id)">
@@ -54,6 +57,9 @@
                             <option value="4.50">4.50</option>
                             <option value="5.00">5.00</option>
                         </select>
+                        <span ng-if="vac.newRatings[track.track_id].saved" class="label label-success">Saved</span>
+                        <span ng-if="vac.newRatings[track.track_id].saving" class="label label-warning">Saving</span>
+                        <span ng-if="vac.newRatings[track.track_id].failed" class="label label-danger">Failed</span>
                     </div>
                     <div class="form-group" ng-if="track.david_rating===null && userId==='4'">
                         <select ng-model="vac.newRatings[track.track_id].rating_score" class="form-control" ng-change="vac.saveRating(track.track_id)">
@@ -67,6 +73,9 @@
                             <option value="4.50">4.50</option>
                             <option value="5.00">5.00</option>
                         </select>
+                        <span ng-if="vac.newRatings[track.track_id].saved" class="label label-success">Saved</span>
+                        <span ng-if="vac.newRatings[track.track_id].saving" class="label label-warning">Saving</span>
+                        <span ng-if="vac.newRatings[track.track_id].failed" class="label label-danger">Failed</span>
                     </div>
 				</form>
 			</div>

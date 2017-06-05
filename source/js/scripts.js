@@ -7,8 +7,8 @@ import pageFooter from '../components/common/page-footer/page-footer-directive';
 import homeController from '../components/home/home-controller';
 import albumsController from '../components/albums/albums-controller';
 import artistsController from '../components/artists/artists-controller';
-import viewAlbumController from '../components/view-album/view-album-controller';
-import viewArtistController from '../components/view-artist/view-artist-controller';
+import viewAlbumController from '../components/albums/view-album-controller';
+import viewArtistController from '../components/artists/view-artist-controller';
 import genresController from '../components/genres/genres-controller';
 import statusController from '../components/status/status-controller';
 import accountController from '../components/account/account-controller';
@@ -45,7 +45,7 @@ app.config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
             activeTab: 'albums'
         })
         .when('/view-album/:id', {
-            templateUrl: 'components/view-album/view-album-template.html',
+            templateUrl: 'components/albums/view-album-template.html',
             controller: 'viewAlbumController',
             controllerAs: 'vac',
             activeTab: 'albums'
@@ -57,7 +57,7 @@ app.config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
             activeTab: 'artists'
         })
         .when('/view-artist/:id', {
-            templateUrl: 'components/view-artist/view-artist-template.html',
+            templateUrl: 'components/artists/view-artist-template.html',
             controller: 'viewArtistController',
             controllerAs: 'varc',
             activeTab: 'artists'

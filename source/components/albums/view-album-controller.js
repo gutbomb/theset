@@ -45,6 +45,8 @@ export default function ($http, $routeParams, $rootScope, $location) {
     }
 
     function saveRating(trackId) {
+        vac.newRatings[trackId].failed=false;
+        vac.newRatings[trackId].saving=true;
         $http({
             method: 'POST',
             url: '/api/rating',
@@ -52,11 +54,14 @@ export default function ($http, $routeParams, $rootScope, $location) {
             headers : {'Content-Type': 'application/json'}
         })
         .then(function() {
+            vac.newRatings[trackId].saving=false;
+            vac.newRatings[trackId].saved=true;
             getTracks();
             getRatings();
         },
         function() {
-            $location.path('/login');
+            vac.newRatings[trackId].saving=false;
+            vac.newRatings[trackId].failed=true;
         });
     }
 
@@ -76,6 +81,8 @@ export default function ($http, $routeParams, $rootScope, $location) {
     }
 
     function updateRating(ratingId, trackId) {
+        vac.ratings[trackId].failed=false;
+        vac.ratings[trackId].updating=true;
         $http({
             method: 'PUT',
             url: '/api/rating/'+ratingId,
@@ -83,10 +90,13 @@ export default function ($http, $routeParams, $rootScope, $location) {
             headers : {'Content-Type': 'application/json'}
         })
         .then(function() {
+            vac.ratings[trackId].updating=false;
+            vac.ratings[trackId].updated=true;
             getRatings();
         },
         function() {
-            $location.path('/login');
+            vac.ratings[trackId].updating=false;
+            vac.ratings[trackId].false=true;
         });
     }
 
