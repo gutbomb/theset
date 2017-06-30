@@ -1,10 +1,8 @@
-export default function ($scope, $route, $location, $window, $rootScope) {
+export default function ($scope, $route, loginService) {
     $scope.$route = $route;
 
     function logout() {
-        $window.localStorage.clear();
-        $rootScope.isLoggedIn = false;
-        $location.path('/loginpage');
+        loginService.logoutUser();
     }
 
     $scope.logout = logout;

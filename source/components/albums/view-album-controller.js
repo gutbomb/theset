@@ -1,25 +1,27 @@
-export default function ($http, $routeParams, $rootScope, $location) {
+export default function ($http, $routeParams, $rootScope, $location, appConfig, loginService) {
     let vac = this;
 
-    vac.editMode = 0;
+    vac.editMode = false;
+    vac.hideRatings = false;
+    vac.noComments = true;
 
     function getRatings () {
-        $http.get('/api/rating?album_id='+$routeParams.id+'&rating_source='+$rootScope.userId).
+        $http.get(appConfig.apiUrl+'/rating?album_id='+$routeParams.id+'&rating_source='+$rootScope.userId).
         then(function(response) {
             vac.ratings = response.data;
         });
     }
 
     function getAlbum () {
-        $http.get('/api/year/active').
+        $http.get(appConfig.apiUrl+'/year').
         then(function(response) {
-            vac.currentYear = response.data[0];
-            $http.get('/api/album/'+$routeParams.id).
+            vac.currentYear = response.data.activeYear;
+            $http.get(appConfig.apiUrl+'/album/'+$routeParams.id).
             then(function(response) {
                 vac.album = response.data[0];
-                if (vac.album.year === vac.currentYear.year) {
+                if (vac.album.year === vac.currentYear) {
                     if ($rootScope.isLoggedIn===true) {
-                        vac.editMode = 1;
+                        vac.editMode = true;
                         getRatings();
                         vac.reviewCount=0;
                         if (typeof(vac.album.reviews)!=='undefined') {
@@ -38,7 +40,7 @@ export default function ($http, $routeParams, $rootScope, $location) {
     }
 
     function getTracks () {
-        $http.get('/api/track?album_id='+$routeParams.id).
+        $http.get(appConfig.apiUrl+'/track?album_id='+$routeParams.id).
         then(function(response) {
             vac.tracks = response.data;
         });
@@ -49,7 +51,7 @@ export default function ($http, $routeParams, $rootScope, $location) {
         vac.newRatings[trackId].saving=true;
         $http({
             method: 'POST',
-            url: '/api/rating',
+            url: appConfig.apiUrl+'/rating',
             data: {track_id: trackId, track_rating: vac.newRatings[trackId].rating_score, track_album: $routeParams.id, action: 'save'},
             headers : {'Content-Type': 'application/json'}
         })
@@ -68,7 +70,7 @@ export default function ($http, $routeParams, $rootScope, $location) {
     function saveReview() {
         $http({
             method: 'POST',
-            url: '/api/review',
+            url: appConfig.apiUrl+'/review',
             data: {review_album: $routeParams.id, review_text: vac.newReview, action: 'save'},
             headers : {'Content-Type': 'application/json'}
         })
@@ -85,7 +87,7 @@ export default function ($http, $routeParams, $rootScope, $location) {
         vac.ratings[trackId].updating=true;
         $http({
             method: 'PUT',
-            url: '/api/rating/'+ratingId,
+            url: appConfig.apiUrl+'/rating/'+ratingId,
             data: {track_rating: vac.ratings[trackId].rating_score},
             headers : {'Content-Type': 'application/json'}
         })
@@ -103,7 +105,7 @@ export default function ($http, $routeParams, $rootScope, $location) {
     function updateReview(reviewIndex) {
         $http({
             method: 'PUT',
-            url: '/api/review/'+vac.album.reviews[reviewIndex].review_id,
+            url: appConfig.apiUrl+'/review/'+vac.album.reviews[reviewIndex].review_id,
             data: {review_text: vac.album.reviews[reviewIndex].review_text},
             headers : {'Content-Type': 'application/json'}
         })
@@ -116,16 +118,20 @@ export default function ($http, $routeParams, $rootScope, $location) {
     }
 
     function getComments() {
-        $http.get('/api/comment?album_id='+$routeParams.id).
+        $http.get(appConfig.apiUrl+'/comment?album_id='+$routeParams.id).
         then(function(response) {
+            vac.noComments=false;
             vac.comments = response.data;
+        },
+        function() {
+            vac.noComments=true;
         });
     }
 
     getAlbum();
     getTracks();
 
-    if (vac.editMode===0) {
+    if (vac.editMode===false) {
         getComments();
     } else {
         getRatings();
@@ -134,7 +140,7 @@ export default function ($http, $routeParams, $rootScope, $location) {
     function postComment() {
         $http({
             method: 'POST',
-            url: '/api/comment',
+            url: appConfig.apiUrl+'/comment',
             data: {album_id: $routeParams.id, comment_text: vac.newComment},
             headers : {'Content-Type': 'application/json'}
         })
@@ -142,8 +148,10 @@ export default function ($http, $routeParams, $rootScope, $location) {
             getComments();
             vac.newComment='';
         },
-        function() {
-            $location.path('/login');
+        function(response) {
+            if (response.status===401) {
+                loginService.logoutUser();
+            }
         });
     }
 

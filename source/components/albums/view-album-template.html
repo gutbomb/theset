@@ -18,60 +18,60 @@
 		<div class="row">
 			<div class="col-xs-1"><strong>#</strong></div>
 			<div class="col-xs-7"><strong>Song Title</strong></div>
-			<div class="col-xs-2" ng-if="vac.editMode == 0 && vac.hideRatings == false"><strong>Jason's Rating</strong></div>
-			<div class="col-xs-2" ng-if="vac.editMode == 0 && vac.hideRatings == false"><strong>David's Rating</strong></div>
-			<div class="col-xs-4" ng-if="vac.editMode == 1"><strong>Your Rating</strong></div>
+			<div class="col-xs-2" ng-if="vac.editMode == false && vac.hideRatings == false"><strong>Jason's Rating</strong></div>
+			<div class="col-xs-2" ng-if="vac.editMode == false && vac.hideRatings == false"><strong>David's Rating</strong></div>
+			<div class="col-xs-4" ng-if="vac.editMode"><strong>Your Rating</strong></div>
 		</div>
 		<div class="row" ng-repeat="track in vac.tracks track by $index">
 			<div class="col-xs-1">{{$index+1}}</div>
 			<div class="col-xs-7">{{track.track_name}}</div>
-			<div class="col-xs-2" ng-if="vac.editMode == 0 && vac.hideRatings == false">{{track.jason_rating}}</div>
-			<div class="col-xs-2" ng-if="vac.editMode == 0 && vac.hideRatings == false">{{track.david_rating}}</div>
-			<div class="col-xs-4" ng-if="vac.editMode == 1">
+            <div class="col-xs-2" ng-if="vac.editMode == false && vac.hideRatings == false">{{track.jason_rating}}</div>
+			<div class="col-xs-2" ng-if="vac.editMode == false && vac.hideRatings == false">{{track.david_rating}}</div>
+			<div class="col-xs-4" ng-if="vac.editMode">
 				<form class="form-inline">
 					<div class="form-group" ng-repeat="rating in vac.ratings track by $index" ng-if="rating.track_id===track.track_id && rating.source_id===userId">
-						<select ng-model="vac.ratings[$index].rating_score" class="form-control" ng-change="vac.updateRating(rating.rating_id, $index)">
-							<option value="1.00">1.00</option>
-							<option value="1.50">1.50</option>
-							<option value="2.00">2.00</option>
-							<option value="2.50">2.50</option>
-							<option value="3.00">3.00</option>
-							<option value="3.50">3.50</option>
-							<option value="4.00">4.00</option>
-							<option value="4.50">4.50</option>
-							<option value="5.00">5.00</option>
+						<select ng-model="vac.ratings[$index].rating_score" class="form-control" ng-change="vac.updateRating(rating.rating_id, $index)" convert-to-number>
+							<option value="1">1</option>
+							<option value="1.5">1.5</option>
+							<option value="2">2</option>
+							<option value="2.5">2.5</option>
+							<option value="3">3</option>
+							<option value="3.5">3.5</option>
+							<option value="4">4</option>
+							<option value="4.5">4.5</option>
+							<option value="5">5</option>
 						</select>
                         <span ng-if="vac.ratings[$index].updated" class="label label-success">Updated</span>
                         <span ng-if="vac.ratings[$index].updating" class="label label-warning">Updating</span>
                         <span ng-if="vac.ratings[$index].failed" class="label label-danger">Failed</span>
 					</div>
-                    <div class="form-group" ng-if="track.jason_rating===null && userId==='2'">
-                        <select ng-model="vac.newRatings[track.track_id].rating_score" class="form-control" ng-change="vac.saveRating(track.track_id)">
-                            <option value="1.00">1.00</option>
-                            <option value="1.50">1.50</option>
-                            <option value="2.00">2.00</option>
-                            <option value="2.50">2.50</option>
-                            <option value="3.00">3.00</option>
-                            <option value="3.50">3.50</option>
-                            <option value="4.00">4.00</option>
-                            <option value="4.50">4.50</option>
-                            <option value="5.00">5.00</option>
+                    <div class="form-group" ng-if="track.jason_rating===null && userId===2">
+                        <select ng-model="vac.newRatings[track.track_id].rating_score" class="form-control" ng-change="vac.saveRating(track.track_id)" convert-to-number>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3.5</option>
+                            <option value="4">4</option>
+                            <option value="4.5">4.5</option>
+                            <option value="5">5</option>
                         </select>
                         <span ng-if="vac.newRatings[track.track_id].saved" class="label label-success">Saved</span>
                         <span ng-if="vac.newRatings[track.track_id].saving" class="label label-warning">Saving</span>
                         <span ng-if="vac.newRatings[track.track_id].failed" class="label label-danger">Failed</span>
                     </div>
-                    <div class="form-group" ng-if="track.david_rating===null && userId==='4'">
-                        <select ng-model="vac.newRatings[track.track_id].rating_score" class="form-control" ng-change="vac.saveRating(track.track_id)">
-                            <option value="1.00">1.00</option>
-                            <option value="1.50">1.50</option>
-                            <option value="2.00">2.00</option>
-                            <option value="2.50">2.50</option>
-                            <option value="3.00">3.00</option>
-                            <option value="3.50">3.50</option>
-                            <option value="4.00">4.00</option>
-                            <option value="4.50">4.50</option>
-                            <option value="5.00">5.00</option>
+                    <div class="form-group" ng-if="track.david_rating===null && userId===4">
+                        <select ng-model="vac.newRatings[track.track_id].rating_score" class="form-control" ng-change="vac.saveRating(track.track_id)" convert-to-number>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3.5</option>
+                            <option value="4">4</option>
+                            <option value="4.5">4.5</option>
+                            <option value="5">5</option>
                         </select>
                         <span ng-if="vac.newRatings[track.track_id].saved" class="label label-success">Saved</span>
                         <span ng-if="vac.newRatings[track.track_id].saving" class="label label-warning">Saving</span>
@@ -83,7 +83,7 @@
 	</div>
 </section>
 
-<section id="album-review" ng-if="vac.album.reviews && vac.editMode === 0">
+<section id="album-review" ng-if="vac.album.reviews && vac.editMode === false">
 	<div class="container">
 		<div ng-repeat="review in vac.album.reviews">
 			<h3>{{review.review_source_name}}'s Review - Rating: {{review.score | number : 2}}</h3>
@@ -93,7 +93,7 @@
 	</div>
 </section>
 
-<section id="album-review" ng-repeat="review in vac.album.reviews track by $index" ng-if="review.review_source_id === userId && vac.editMode === 1">
+<section id="album-review" ng-repeat="review in vac.album.reviews track by $index" ng-if="review.review_source_id === userId && vac.editMode === true">
     <div class="container">
         <form>
             <h3>Your Review</h3>
@@ -109,7 +109,7 @@
     </div>
 </section>
 
-<section id="album-review" ng-if="vac.editMode === 1 && vac.reviewCount === 0">
+<section id="album-review" ng-if="vac.editMode === true && vac.reviewCount === 0">
     <div class="container">
         <form>
             <h3>Your Review</h3>
@@ -125,11 +125,11 @@
     </div>
 </section>
 
-<section id="comments" ng-if="vac.editMode == 0">
+<section id="comments" ng-if="vac.editMode == false">
 	<div class="container">
 		<h3>Comments</h3>
 		<hr />
-		<div ng-repeat="comment in vac.comments">
+		<div ng-repeat="comment in vac.comments | orderBy: comment.comment_date">
 			<h4>{{comment.source_name}} on {{comment.comment_date}}</h4>
 			<div class="album-blurb-text">{{comment.comment_text}}</div>
 			<hr />
@@ -149,7 +149,7 @@
 	</div>
 </section>
 
-<section id="album-statistics" ng-if="vac.editMode == 0">
+<section id="album-statistics" ng-if="vac.editMode == false">
   <div class="container">
     <h3>Album Statistics</h3>
     <div class="row">

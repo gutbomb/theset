@@ -1,18 +1,14 @@
 export default function ($http, appConfig) {
     let hc = this;
-    $http.get(appConfig.apiUrl+'/year/previous').
+    $http.get(appConfig.apiUrl+'/year').
     then(function(response) {
-        hc.previousYear = response.data[0];
-        $http.get(appConfig.apiUrl+'/album?year='+hc.previousYear.year).
+        hc.previousYear = response.data.previousYear;
+        hc.currentYear = response.data.activeYear;
+        $http.get(appConfig.apiUrl+'/album?year='+hc.previousYear).
         then(function(response) {
             hc.previousAlbums = response.data;
         });
-    });
-
-    $http.get(appConfig.apiUrl+'/year/active').
-    then(function(response) {
-        hc.currentYear = response.data[0];
-        $http.get(appConfig.apiUrl+'/album?year='+hc.currentYear.year).
+        $http.get(appConfig.apiUrl+'/album?year='+hc.currentYear).
         then(function(response) {
             hc.currentAlbums = response.data;
         });

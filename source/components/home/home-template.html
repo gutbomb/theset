@@ -18,10 +18,10 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-4 col-sm-push-8">
-            <img ng-src="images/years/{{hc.previousYear.year}}.jpg" class="img-circle img-responsive">
+            <img ng-src="images/years/{{hc.previousYear}}.jpg" class="img-circle img-responsive">
           </div>
           <div class="col-xs-12 col-sm-8 col-sm-pull-4">
-            <h2>Last Week's Assignment: {{hc.previousYear.year}}</h2>
+            <h2>Last Week's Assignment: {{hc.previousYear}}</h2>
             <hr />
             <div ng-repeat="previousAlbum in hc.previousAlbums">
               <h3>{{previousAlbum.source_name}}'s Pick: <a href="/view-album/{{previousAlbum.album_id}}">{{previousAlbum.album_name}}</a> by <a href="/view-artist/{{previousAlbum.artist_id}}">{{previousAlbum.artist_name}}</a></h3>
@@ -41,10 +41,10 @@
       <div class="container">
       <div class="row">
           <div class="col-xs-12 col-sm-4">
-            <img ng-src="images/years/{{hc.currentYear.year}}.jpg" class="img-circle img-responsive align-middle">
+            <img ng-src="images/years/{{hc.currentYear}}.jpg" class="img-circle img-responsive align-middle">
           </div>
           <div class="col-xs-12 col-sm-8 text-right">
-            <h2>This Week's Assignment: {{hc.currentYear.year}}</h2>
+            <h2>This Week's Assignment: {{hc.currentYear}}</h2>
             <hr />
             <div ng-repeat="currentAlbum in hc.currentAlbums">
               <h3>{{currentAlbum.source_name}}'s Pick: <a href="/view-album/{{currentAlbum.album_id}}">{{currentAlbum.album_name}}</a> by <a href="/view-artist/{{currentAlbum.artist_id}}">{{currentAlbum.artist_name}}</a></h3>

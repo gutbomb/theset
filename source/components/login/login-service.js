@@ -1,4 +1,4 @@
-export default function ($q, $http, $window, appConfig) {
+export default function ($q, $http, $window, $rootScope, $location, appConfig) {
     function loginUser(username, password) {
         let defer = $q.defer();
         let self = this;
@@ -75,10 +75,10 @@ export default function ($q, $http, $window, appConfig) {
         let defer = $q.defer();
 
         $http({
-            method: 'POST',
+            method: 'PUT',
             url: appConfig.apiUrl+'/change-password',
             data: {oldPassword: oldPassword, newPassword: newPassword},
-            headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+            headers : {'Content-Type': 'application/json'}
         }).then(function() {
             defer.resolve(true);
         }, function() {
@@ -100,9 +100,15 @@ export default function ($q, $http, $window, appConfig) {
             }
         );
     }
+    function logoutUser() {
+        clearToken();
+        $rootScope.isLoggedIn = false;
+        $location.path('/loginpage');
+    }
 
     return {
         loginUser: loginUser,
+        logoutUser: logoutUser,
         getActiveUser: getActiveUser,
         getToken: getToken,
         clearToken: clearToken,

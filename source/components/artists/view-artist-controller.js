@@ -1,14 +1,14 @@
-export default function ($http, $routeParams) {
+export default function ($http, $routeParams, appConfig) {
     let varc = this;
 
-    $http.get('/api/artist/'+$routeParams.id).
+    $http.get(appConfig.apiUrl+'/artist/'+$routeParams.id).
     then(function(response) {
         varc.artist = response.data[0];
     });
 
 
 
-    $http.get('/api/album?artist_id='+$routeParams.id).
+    $http.get(appConfig.apiUrl+'/album?artist_id='+$routeParams.id).
     then(function(response) {
         varc.albums = response.data;
     });

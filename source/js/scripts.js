@@ -1,5 +1,6 @@
-var app = angular.module('theSetApp', ['ngRoute', 'ngSanitize']);
+var app = angular.module('theSetApp', ['ngRoute', 'ngSanitize', 'theSetApp.config']);
 
+import convertToNumber from '../components/common/convert-to-number/convert-to-number-directive';
 import navMenuController from '../components/common/nav-menu/nav-menu-controller';
 import navMenu from '../components/common/nav-menu/nav-menu-directive';
 import jumbotron from '../components/common/jumbotron/jumbotron-directive';
@@ -20,10 +21,6 @@ import usersController from '../components/users/users-controller';
 import addUserController from '../components/users/add-user-controller';
 import editUserController from '../components/users/edit-user-controller';
 import deleteUserModal from '../components/users/delete-user-modal-directive';
-
-app.constant('appConfig', {
-    apiUrl: '/api'
-});
 
 app.config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
@@ -115,6 +112,7 @@ app.config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
         });
 });
 
+app.directive('convertToNumber', convertToNumber);
 app.controller('navMenuController', navMenuController);
 app.directive('navMenu', navMenu);
 app.directive('jumbotron', jumbotron);
@@ -148,7 +146,7 @@ app.run(function ($rootScope, $location, loginService) {
             loginService.getUser($rootScope.userId).then(function(user) {
                 $rootScope.user=user;
                 $rootScope.isAdmin = $rootScope.user.user_level === 'admin';
-                if($rootScope.user.password_mustchange==='1') {
+                if($rootScope.user.password_mustchange===1) {
                     $location.path('/change-password');
                 }
             });
