@@ -4,11 +4,6 @@
             "apiUrl": "http://localhost:3001/api"
         }
     },
-    "stage" : {
-        "appConfig": {
-            "apiUrl": "/api"
-        }
-    },
     "prod" : {
         "appConfig": {
             "apiUrl": "http://theset.gutbomb.net:3001/api"

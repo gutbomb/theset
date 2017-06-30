@@ -4,6 +4,6 @@ node_modules/
 .idea/
 theset.iml
 lib/
-gulpfile.js
-source/includes/dbconnect.php
 bundle.js
+.DS_Store
+
