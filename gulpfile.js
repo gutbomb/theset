@@ -17,7 +17,7 @@ const gulp  = require('gulp'),
 	sass = require('gulp-sass'),
 	rename= require('gulp-rename'),
 	autoprefixer = require('gulp-autoprefixer'),
-	// imagemin= require('gulp-imagemin'),
+	imagemin= require('gulp-imagemin'),
 	reload = browserSync.reload,
 	source = 'source',
 	dest = 'public',
@@ -86,7 +86,9 @@ gulp.task('css', function() {
 
 // images task
 gulp.task('images', function() {
-	return gulp.src(source+'/images/**/*').pipe(gulp.dest(dest+'/images'));
+	return gulp.src(source+'/images/**/*')
+		.pipe(imagemin())
+		.pipe(gulp.dest(dest+'/images'));
 });
 
 // js task
