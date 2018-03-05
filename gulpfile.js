@@ -1,5 +1,4 @@
 /* File: gulpfile.js */
-
 // grab our gulp packages
 const gulp  = require('gulp'),
     eslint = require('gulp-eslint'),
