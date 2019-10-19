@@ -1,5 +1,4 @@
 var app = angular.module('theSetApp', ['ngRoute', 'ngSanitize', 'theSetApp.config']);
-// this is to test jenkins
 import convertToNumber from '../components/common/convert-to-number/convert-to-number-directive';
 import navMenuController from '../components/common/nav-menu/nav-menu-controller';
 import navMenu from '../components/common/nav-menu/nav-menu-directive';
