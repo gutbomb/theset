@@ -1,0 +1,13 @@
+version: '3'
+services:
+  apache:
+    build:
+      context: apache
+    ports:
+      - 8080:80
+    volumes:
+      - ./public:/usr/local/apache2/htdocs
+      - ./apache-conf:/usr/local/apache2/conf
+
+networks:
+  default:
