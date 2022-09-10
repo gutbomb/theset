@@ -6,7 +6,7 @@
     },
     "prod" : {
         "appConfig": {
-            "apiUrl": "https://theset.gutbomb.net:3001/api"
+            "apiUrl": "https://thesetapi.gutbomb.net/api"
         }
     }
 }
