@@ -6,7 +6,11 @@
   "dependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp watch"
+    "dev": "gulp watch",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.9"
   },
   "repository": {
     "type": "git",
