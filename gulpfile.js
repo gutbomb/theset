@@ -122,8 +122,8 @@ gulp.task('eslint', function() {
 // watch task
 gulp.task('watch', function() {
 	browserSync.init({
-		host: 'jasonmac.local',
-        proxy: 'jasonmac.local:8080'
+		host: 'localhost',
+        proxy: 'localhost:8080'
 	});
     gulp.watch(source+['/**/*.js',], ['eslint', 'js', reload]);
 	gulp.watch(source+'/**/*.html', ['html', reload]);
