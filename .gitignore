@@ -7,3 +7,4 @@ lib/
 bundle.js
 .DS_Store
 package-lock.json
+config.json

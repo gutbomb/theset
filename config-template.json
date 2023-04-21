@@ -1,0 +1,12 @@
+{
+    "dev" : {
+        "appConfig": {
+            "apiUrl": ""
+        }
+    },
+    "prod" : {
+        "appConfig": {
+            "apiUrl": ""
+        }
+    }
+}
